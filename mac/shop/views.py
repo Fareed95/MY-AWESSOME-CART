@@ -21,11 +21,25 @@ def index(request):
 
 def CONTACT(request):
     return HttpResponse("CONTACT US ")
+
+
 def ABOUT(request):
     return render(request,'shop/about.html')
+
+
 def SEARCH(request):
     return HttpResponse("SEARCH US ")
-def PRODVIEW(request):
-    return HttpResponse("PRODVIEW")
+
+
+def PRODVIEW(request, myid):
+    # fetching proiducts
+    product =Product.objects.filter(id= myid)
+    
+    return render(request, "shop/productdisplay.html",{'product': product[0]})
+
+
+
 def CART(request):
     return HttpResponse("CART")
+
+
