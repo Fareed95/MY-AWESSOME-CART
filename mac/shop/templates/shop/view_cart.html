@@ -1,0 +1,54 @@
+{% extends 'shop/basic.html' %}
+{% block title %}Your Cart{% endblock %}
+{%block css%}
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 220px;
+}
+.cart-summary h2 {
+    margin-right: 90px;
+}
+
+.cart-button {
+    padding: 10px 20px;
+    font-size: 18px;
+}
+{% endblock %}
+{% block body %}
+
+<div class="container my-4">
+    <h2>Your Cart</h2>
+    <h4>Total Items in Cart: {{ total_items }}</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Images</th>
+                <th>Product name </th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Per Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td><img src="/shop/media/{{item.product.product_images }}" alt="{{ item.product.product_name }}"></td>
+                <td>{{ item.product.product_name }}</td>
+                <td>{{ item.product.product_desc }}</td>
+                <td>{{ item.product.product_category }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.product_price }}</td>
+                <td>{{item.quantity}}x{{ item.product.product_price}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table><hr>
+    <div class="cart-summary">
+        <h2>TOTAL CART PRIZE: Rs {{ total_prize }}/-</h2>
+        <button type="submit" class="btn btn-primary cart-button">BUY ALL {{ total_items }} ITEMS NOW</button>
+    </div>
+</div>
+{% endblock %}

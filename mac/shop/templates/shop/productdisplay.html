@@ -7,6 +7,18 @@
     align-items: center;
     text-align: center;
 }
+.button-container {
+    display: flex;
+    gap: 10px;  /* Adjust the gap according to your preference */
+}
+
+.common-button {
+    width: 150px;  /* Set the width to your desired value */
+}
+
+.form-button {
+    width: 100%;  /* Set the width to 100% to take up the entire space in the form */
+}
 {% endblock %}
 {% block body %}
 <ul>
@@ -16,10 +28,15 @@
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             
-            <img src="/shop/media/{{ product.product_images }}" height="330px" width="330px" alt="{{ product.product_name }}">
+            <img src="/shop/media/{{product.product_images}}" height="330px" width="330px" alt="{{ product.product_name }}">
            <h4>ONLY FOR RS. {{product.product_price}}/-</h4>
-           <button type="button" class="btn btn-primary btn-lg">BUY NOW </button>
-           <button type="button" id="pv{{i.id}}" class="btn btn-secondary btn-lg">ADD TO CART </button>    
+           <div class="button-container">
+            <button type="button" class="btn btn-primary btn-lg common-button">BUY NOW</button>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg cart common-button form-button">Add To Cart</button>
+            </form>
+        </div>
         </div>
     </div>
 </div>
@@ -36,34 +53,4 @@
 </ul>
 
 
-{% endblock %}
-{% block js %}
-<script>
-console.log('working');
-if(localStorage.getItem('cart') == null){
-var cart = {};
-}
-else
-{
-cart = JSON.parse(localStorage.getItem('cart'));
-document.getElementById('cart').innerHTML = Object.keys(cart).length;
-}
-$('.cart').click(function(){
-console.log('clicked');
-var idstr = this.id.toString();
-console.log(idstr);
-if (cart[idstr] !=undefined){
-cart[idstr] = cart[idstr] + 1;
-}
-else
-{
-cart[idstr] = 1;
-}
-console.log(cart);
-localStorage.setItem('cart', JSON.stringify(cart));
-document.getElementById('cart').innerHTML = Object.keys(cart).length;
-});
-$('#popcart').popover();
-document.getElementById("popcart").setAttribute('data-content', '<h5>Cart for your items in my shopping cart</h5>');
-</script>
 {% endblock %}
