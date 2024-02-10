@@ -1,0 +1,211 @@
+{%extends 'blog/basic.html' %}
+{%block title%} Blog page  {% endblock %}
+{%block css%}
+body{
+    font-size:14px;
+    font-family: sans-serif;
+    color:#333;
+    background:#ddd;
+    overflow-x:hidden
+  }
+  a{
+    text-decoration:none;
+    color:#aaa
+  }
+  
+  
+  
+  .wrapper{
+    position: relative;
+    padding-bottom: 56.25125%;
+    height: 0;
+  }
+  .hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height:200px;
+    background-color:#999;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    overflow:hidden;
+    animation: fader 60s  infinite;
+  }
+  .hero:before{
+    content:" ";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 90%,rgba(0,0,0,0.65) 100%);
+    z-index:0
+  }
+  @keyframes fader {
+    0%,30%,100%{ background-image:url(https://68.media.tumblr.com/02ace438b88c1b42acdf041c9cfb40a0/tumblr_oj92canMJ21vm743bo1_1280.jpg)}
+  33%,60% { background-image: url(https://68.media.tumblr.com/6dd9c3eb4e1b814138cd88808fa4924c/tumblr_oix3a6uSrb1tgbn6xo1_1280.jpg); }
+  63%,97% { background-image: url(https://68.media.tumblr.com/9fe927a6c887499af03edae78bdd4538/tumblr_ok4v0050Lo1uz44pdo1_500.jpg) }
+  }
+  .hero h1{
+    padding:.5em;
+    width:50%;
+    min-width:190px;
+    position:absolute;
+    bottom:0
+  }
+  .hero a{
+    text-decoration:none;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    background:#fff;
+    padding:0.12em 0.5em;
+    font-family: share;
+    font-size: calc(1vw + 1vh + 3.5vmin);
+    line-height:calc(1vw + 1vh + 6.5vmin);
+    color:#000;
+    text-transform:uppercase;
+    mix-blend-mode:screen;
+    transition:all 0.4s
+  }
+  .hero a:hover{
+    line-height:1.3em;
+    mix-blend-mode:exclusion;
+  }
+  .container{
+    padding:0.1em 1em;
+    text-align:justify;
+    line-height:1.5em;
+    letter-spacing:0.02em;
+    background:#fff;
+    margin:1em
+  }
+  
+  
+  .gen,.sel,.men{
+    display:flex;
+    position:absolute;
+    align-items:center;
+    justify-content:center;
+    right:30px;
+    bottom:30px;
+    color:#333;
+    background:rgba(255,255,255,0.8);
+    width:30px;
+    height:30px;
+    text-align:center;
+    border-radius:50%;
+    transition:all 0.2s;
+    z-index:5
+  }
+  .men{
+    background:rgba(0,0,0,0.1);
+    color:#fff;
+    top:20px;
+    height:1.4em;
+    width:1.5em;
+    overflow:hidden;
+    bottom:auto !important;
+    border-radius:0;
+    font-size:1.8em;
+    font-weight:700
+  }
+  .men:hover{
+    background:rgba(220,220,220,0.91);
+    color:#111;
+  }
+  .men:hover + nav, nav:hover{
+    top:0;
+  }
+  .sel{
+    right:70px;
+  }
+  .gen:hover,.sel:hover{
+    background:#0a2f54;
+    color:#ddd
+  }
+  
+  footer{
+    background:#0a0c10;
+    padding:1em;
+    text-align:center;
+    color:#ddd;
+    font-size:11px
+  }
+  
+  
+  [data-tip]::after {
+    text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    top:40px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    content: attr(data-tip);
+    font-family: sans-serif;
+    text-align: center;
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1em 1.5em;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    z-index: 1000;
+  }
+  
+  [data-tip]:hover::after {
+    display: block;
+    opacity:1
+  }
+  
+  #btn-twtr{
+    clear:both;
+    color:#fff;
+    border:2px solid;
+    border-radius:3px;
+    text-align:center;
+    text-decoration:none;
+    display:block;
+    font-family:sans-serif;
+    font-size:14px;
+    width:13em;
+    padding:5px 10px;
+    font-weight:600;
+    margin:40px auto;
+    background:rgba(0,0,0,0.2);
+    box-shadow:0 0 0px 3px rgba(0,0,0,0.2);
+    opacity:0.8
+  }#btn-twtr:hover{color:#fff;opacity:1}
+{% endblock %}
+
+{%block body%}
+<div class="wrapper">
+    <a href="#" class="men">☰</a>
+     <nav>
+     <a href="#">Menu Item</a>  <a href="#">Menu Item</a>  <a href="#">Menu Item</a>
+   </nav>
+     <div class="hero"><h1><a href="#">Create better Titles for your blog</a></h1>
+     </div>
+      <a href="#" data-tip="Share" class="gen">⚒</a>
+     <a href="#" data-tip="Favorites" class="sel">★</a>
+   </div>
+   <div class="container">
+   <p>Rockstar developer internet of things bleeding edge browser extension social capital Sandboxing. Podcasting visionary, feeds; open-source one-to-one user-contributed world-class e-markets action-items rich initiatives proactive real-time, webservices; synergies, granular holistic relationships, portals communities. Dynamic redefine, web-enabled authentic folksonomies, distributed implement B2B iterate, channels beta-test, web-enabled disintermediate harness repurpose orchestrate.
+     </p>
+     <p>
+   Maximize deliverables initiatives brand next-generation redefine, channels one-to-one innovative strategic architectures. Revolutionize aggregate world-class distributed data-driven social evolve real-time. Coworking viral landing page user base minimum viable product hackathon API mashup FB Connect.</p>
+  
+   <a href="#" id="btn-twtr" target="_b">Follow me on Twitter</a>
+   </div>
+   <footer>
+   <p>Text generated by <a href="#">Startup Ipsum</a></p>
+   </footer>
+{% endblock %}

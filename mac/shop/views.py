@@ -92,5 +92,3 @@ def view_cart(request):
     }
 
     return render(request, 'shop/view_cart.html', context)
-
-

@@ -1,13 +1,13 @@
 {% extends 'shop/basic.html' %}
 {% block title %}Your Cart{% endblock %}
-{%block css%}
+{% block css %}
 img {
     vertical-align: middle;
     border-style: none;
     width: 220px;
 }
 .cart-summary h2 {
-    margin-right: 90px;
+    margin-right: px;
 }
 
 .cart-button {
@@ -34,20 +34,20 @@ img {
         </thead>
         <tbody>
             {% for item in cart_items %}
-            <tr>
-                <td><img src="/shop/media/{{item.product.product_images }}" alt="{{ item.product.product_name }}"></td>
-                <td>{{ item.product.product_name }}</td>
-                <td>{{ item.product.product_desc }}</td>
-                <td>{{ item.product.product_category }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.product.product_price }}</td>
-                <td>{{item.quantity}}x{{ item.product.product_price}}</td>
-            </tr>
+                <tr>
+                    <td><img src="/shop/media/{{ item.product.product_images }}" alt="{{ item.product.product_name }}"></td>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>{{ item.product.product_desc }}</td>
+                    <td>{{ item.product.product_category }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.product_price }}</td>
+                    <td>{{prize_of_each}}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table><hr>
     <div class="cart-summary">
-        <h2>TOTAL CART PRIZE: Rs {{ total_prize }}/-</h2>
+        <h2>TOTAL CART PRIZE: Rs {{ total_prize}}/-</h2>
         <button type="submit" class="btn btn-primary cart-button">BUY ALL {{ total_items }} ITEMS NOW</button>
     </div>
 </div>
