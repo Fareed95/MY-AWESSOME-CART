@@ -1,6 +1,7 @@
 {% extends 'shop/basic.html' %}
 {% block title %}Your Cart{% endblock %}
 {% block css %}
+
 img {
     vertical-align: middle;
     border-style: none;
@@ -14,6 +15,32 @@ img {
     padding: 10px 20px;
     font-size: 18px;
 }
+
+.quantity {
+    width: 60px;
+    text-align: center;
+}
+
+.remove-item {
+    background-color: #ff6347; /* Red */
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
+.increase-decrease_action{
+    display: flex;
+
+}
+
 {% endblock %}
 {% block body %}
 
@@ -30,6 +57,7 @@ img {
                 <th>Quantity</th>
                 <th>Per Price</th>
                 <th>Total Price</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -39,9 +67,26 @@ img {
                     <td>{{ item.product.product_name }}</td>
                     <td>{{ item.product.product_desc }}</td>
                     <td>{{ item.product.product_category }}</td>
-                    <td>{{ item.quantity }}</td>
+                    <td>
+                        <form method="post" action="{% url 'update_quantity' item.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <input type="hidden" name="quantity" value="{{ item.quantity }}">
+                            <div class="increase-decrease_action">
+                                <button type="submit" name="action" value="decrease" class="btn btn-sm btn-secondary">-</button>
+                                <span class="quantity">{{ item.quantity }}</span>
+                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-secondary">+</button>
+                            </div>
+                        </form>
+                    </td>
                     <td>{{ item.product.product_price }}</td>
                     <td>{{prize_of_each}}</td>
+                    <td>
+                        <form method="post" action="{% url 'remove_item' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-item">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -51,4 +96,5 @@ img {
         <button type="submit" class="btn btn-primary cart-button">BUY ALL {{ total_items }} ITEMS NOW</button>
     </div>
 </div>
+
 {% endblock %}

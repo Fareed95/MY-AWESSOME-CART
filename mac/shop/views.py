@@ -4,6 +4,8 @@ from . models import Product, Contact
 from math import ceil
 from .models import Product, CartItem
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
 
 
 # Create your views here.
@@ -92,3 +94,36 @@ def view_cart(request):
     }
 
     return render(request, 'shop/view_cart.html', context)
+
+def update_quantity(request, item_id):
+    if request.method == 'POST':
+        quantity = int(request.POST.get('quantity'))
+        action = request.POST.get('action')
+
+        if action == 'increase':
+            quantity += 1
+        elif action == 'decrease':
+            quantity -= 1
+            if quantity < 1:
+                quantity = 1
+
+        try:
+            cart_item = CartItem.objects.get(id=item_id)
+            cart_item.quantity = quantity
+            cart_item.save()
+            messages.success(request, 'Quantity updated successfully.')
+        except CartItem.DoesNotExist:
+            messages.error(request, 'Cart item does not exist.')
+
+    return redirect('view_cart')  # Redirect to the view_cart URL after updating quantity
+
+
+def remove_item(request, item_id):
+    # Retrieve the CartItem object using the item_id
+    item = get_object_or_404(CartItem, id=item_id)
+    
+    # Remove the item from the cart
+    item.delete()
+    
+    # Redirect the user back to the view cart page or any other desired page
+    return redirect('view_cart')
