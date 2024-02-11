@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 
+# this is the logic to show the product on homepage of our shop 
 
-# Create your views here.
 def index(request):
     products= Product.objects.all()
     
@@ -27,8 +27,12 @@ def index(request):
     return render(request,'shop/index.html',params)
 
 
+# this is the logic used here to show up the contact page 
+
 def CONTACT(request):
     return render(request,'shop/contact.html')
+
+# in contac it is used for data storing 
 
 def contactstored(request):
     if request.method=="POST":
@@ -60,9 +64,8 @@ def PRODVIEW(request, myid):
     return render(request, "shop/productdisplay.html",{'product': product[0]})
 
 
-
-def CART(request):
-    return HttpResponse("CART")
+def TRACKER(request):
+    return render(request,'shop/tracker.html')
 
 
 @login_required

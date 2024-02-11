@@ -41,6 +41,7 @@ img {
 
 }
 
+
 {% endblock %}
 {% block body %}
 
@@ -51,7 +52,7 @@ img {
         <thead>
             <tr>
                 <th>Images</th>
-                <th>Product name </th>
+                <th>Product name</th>
                 <th>Description</th>
                 <th>Category</th>
                 <th>Quantity</th>
@@ -64,7 +65,12 @@ img {
             {% for item in cart_items %}
                 <tr>
                     <td><img src="/shop/media/{{ item.product.product_images }}" alt="{{ item.product.product_name }}"></td>
-                    <td>{{ item.product.product_name }}</td>
+                    <td>
+                        {{item.product.product_name }}
+                        <a href="/shop/products/{{item.product.id}}">
+                        <button type="submit" class="btn btn-primary cart">View Product</button>
+                    </a>
+                    </td>
                     <td>{{ item.product.product_desc }}</td>
                     <td>{{ item.product.product_category }}</td>
                     <td>
