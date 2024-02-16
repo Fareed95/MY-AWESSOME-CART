@@ -1,5 +1,84 @@
 {% extends 'shop/basic.html' %}
-{%block title%}Tracker page {% endblock %}
-{%block body%}
-This is the tracker page 
+{% block title %}Your Cart{% endblock %}
+{% block css %}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 220px;
+}
+.cart-summary h2 {
+    margin-right: px;
+}
+
+.cart-button {
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.quantity {
+    width: 60px;
+    text-align: center;
+}
+
+.remove-item {
+    background-color: #ff6347; /* Red */
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
+.increase-decrease_action{
+    display: flex;
+
+}
+
+
+{% endblock %}
+{% block body %}
+
+<div class="container my-4">
+    <h2>Your Orders</h2>
+    <h4>Total Items in Your Order {{ total_items }}</h4>
+    <table class="table">
+        <thead>
+            <tr> 
+                <th>Product name</th>
+                <th></th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+                <tr>
+                    
+                    <td>
+                        {{item.quantity}}x{{item.product.product_name }}
+                    </td>
+                    <td>
+                        <a href="/shop/products/{{item.product.id}}">
+                            <button type="submit" class="btn btn-primary cart">View Product</button>
+                        </a>
+                    </td>
+                    
+                    <td>{{ item.product.product_desc }}</td>
+                    <td>{{ item.product.product_category }}</td>
+                    <td>{{ item.product.product_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><hr>
+    
+</div>
+
 {% endblock %}

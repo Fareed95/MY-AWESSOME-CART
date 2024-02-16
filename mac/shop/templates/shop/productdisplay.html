@@ -31,7 +31,9 @@
             <img src="/shop/media/{{product.product_images}}" height="330px" width="330px" alt="{{ product.product_name }}">
            <h4>ONLY FOR RS. {{product.product_price}}/-</h4>
            <div class="button-container">
-            <button type="button" class="btn btn-primary btn-lg common-button">BUY NOW</button>
+            <a href="/shop/billproduct/{{product.id}}">
+                <button type="button" class="btn btn-primary btn-lg common-button">BUY NOW</button>
+            </a>
             <form method="post" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary btn-lg cart common-button form-button">Add To Cart</button>
