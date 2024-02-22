@@ -1,6 +1,7 @@
 {% extends 'shop/basic.html' %}
 {% block title %}Your Cart{% endblock %}
 {% block css %}
+{% load addinggg %}
 
 img {
     vertical-align: middle;
@@ -86,7 +87,7 @@ img {
                         </form>
                     </td>
                     <td>{{ item.product.product_price }}</td>
-                    <td>{{prize_of_each}}</td>
+                    <td>{{ item.product.product_price|multiply:item.quantity }}</td>
                     <td>
                         <form method="post" action="{% url 'remove_item' item.id %}">
                             {% csrf_token %}
